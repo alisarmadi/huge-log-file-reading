@@ -1,0 +1,38 @@
+# docker-compose.yml
+version: "3.8"
+services:
+  nginx:
+    container_name: nginx
+    build: ./docker/nginx
+    command: nginx -g "daemon off;"
+    links:
+      - php
+    ports:
+      - ${WEB_PORT}:80
+    volumes:
+      - ./logs/nginx:/var/log/nginx
+      - ./src:/var/www
+  php:
+    container_name: php
+    build: ./docker/php
+    links:
+      - mongo
+    expose:
+      - ${PHP_FPM_PORT}
+    volumes:
+      - ./src:/var/www
+    working_dir: /var/www
+  mongo:
+    image: mongo:5.0
+    container_name: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
+    restart: unless-stopped
+    ports:
+      - ${MONGO_PORT}:27017
+    volumes:
+      - ./database/mongodb/db:/data/db
+      - ./database/mongodb/dev.archive:/Databases/dev.archive
+      - ./database/mongodb/production:/Databases/production
+    command: [ --auth ]
