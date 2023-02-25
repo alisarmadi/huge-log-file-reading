@@ -15,7 +15,7 @@ $ docker exec -it php composer install --ignore-platform-reqs
 $ docker exec -it php php artisan migrate
 ```
 ## Set necessary permissions to some directory
-Run this command to set necessary permissions to storage and bootstrap/cache directory (Don't do this in production.).
+Run this command to set necessary permissions to storage and bootstrap/cache directory (Please, don't do this in production.).
 ```shell
 $ sudo chmod 777 src/storage src/bootstrap/cache/ -R
 ```
