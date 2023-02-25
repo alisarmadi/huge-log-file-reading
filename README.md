@@ -15,6 +15,13 @@ $ docker exec -it php composer install --ignore-platform-reqs
 $ docker exec -it php artisan migrate
 ```
 
+## Test
+We implemented a happy unit test and a happy feature test in this project, of course we can add other tests to increase our test coverage on the project.
+- Run this command to execute the tests:
+```shell
+$ docker exec -it php php vendor/bin/phpunit
+```
+
 ## Insert log file to the database
 Run this command to import the sample log file called logs.txt located in the storage directory into the database (you can replace this file with your real huge log file).
 ```shell
