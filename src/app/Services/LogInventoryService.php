@@ -27,7 +27,6 @@ class LogInventoryService
             while (!feof($handle)) {
                 $line = fgets($handle);
                 if ($record = $this->setLineToRecord($line)) {
-                    dd($record);
                     $lines[] = $record;
                     $count++;
                 }
